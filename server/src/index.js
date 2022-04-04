@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import db from "./config/database.js";
 
 // routes
-import apiRouter from "./routes/api.js";
+import router from "./routes/index.js";
 
 const port = process.env.APP_PORT || 3000;
 
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Require our routes into the application.
-app.use("/api", apiRouter);
+app.use(router);
 
 // Server listen to port
 try {

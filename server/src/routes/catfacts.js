@@ -1,19 +1,25 @@
-'use strict'
+"use strict";
 
-import { Router } from 'express';
-import handler from './handlers/catfactsHandler.js';
+import { Router } from "express";
+import { getFactsFromAPI } from "../../services/catFactService.js";
+import CatFact from "../models/CatFact.js";
 
 const router = Router();
 
-router.get(
-  '/fromSource',
-  async (req, res, next) => {
-    try {
-      // Call handler to response with data
-    } catch (err) {
-      next(err);
-    }
+router.get("/init", async (req, res) => {
+  const data = await getFactsFromAPI();
+
+  if (data) {
+    const list = data.map((e) => {
+      return { text: e.text };
+    });
+
+    await CatFact.bulkCreate(list);
+
+    res.status(200).send({ message: "success" });
+  } else {
+    res.status(400).send({ errorMessage: "There is an error" });
   }
-)
+});
 
 export default router;
