@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import db from "./config/database.js";
 
@@ -13,6 +14,9 @@ const app = express();
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Enable All CORS Requests
+app.use(cors());
 
 // Require our routes into the application.
 app.use(router);
