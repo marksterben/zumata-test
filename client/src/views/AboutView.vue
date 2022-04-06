@@ -48,10 +48,16 @@ export default {
     async handleDelete(row) {
       const data = await deleteFact(row.id);
       if (data) {
-        alert(data.message);
+        ElMessage({
+          type: "success",
+          message: data.message,
+        });
         this.getFacts();
       } else {
-        alert("delete fact failed");
+        ElMessage({
+          type: "error",
+          message: "delete fact failed",
+        });
       }
     },
 
