@@ -1,7 +1,7 @@
 import CatFact from "../models/CatFact.js";
 
 export const getCatFacts = async (req, res) => {
-  const catFacts = await CatFact.findAll();
+  const catFacts = await CatFact.findAll({ order: [["id", "ASC"]] });
   res.status(200).send({
     data: catFacts,
   });
